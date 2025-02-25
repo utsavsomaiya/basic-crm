@@ -21,13 +21,13 @@
 
     <div class="flex justify-between items-center mb-4">
         <h2 class="text-lg font-semibold">Contacts</h2>
-        <button
-            type="button"
-            wire:click="createContact"
+        <a
+            wire:navigate
+            href="{{ route('contacts.create') }}"
             class="px-4 py-2 bg-slate-300 text-black rounded-lg hover:bg-slate-500 hover:text-white"
         >
             + Add Contact
-        </button>
+        </a>
     </div>
 
 
