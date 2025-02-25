@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Contacts;
 
 use App\Models\Contact;
 use Illuminate\Contracts\View\View;
@@ -11,7 +11,7 @@ use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class Contacts extends Component
+class Index extends Component
 {
     use WithPagination;
 
@@ -37,8 +37,15 @@ class Contacts extends Component
             ->paginate(10);
     }
 
+    public function delete(Contact $contact): void
+    {
+        $contact->delete();
+
+        $this->dispatch('deleted');
+    }
+
     public function render(): View
     {
-        return view('livewire.contacts')->title('Contacts');
+        return view('livewire.contacts.index')->title('Contacts');
     }
 }

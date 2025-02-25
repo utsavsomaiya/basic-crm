@@ -1,16 +1,14 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Contacts;
 
 use App\Livewire\Forms\ContactForm;
 use App\Models\Contact;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
 
-class ContactRow extends Component
+class Edit extends Component
 {
-    public object $loop;
-
     public Contact $contact;
 
     public ContactForm $form;
@@ -24,6 +22,7 @@ class ContactRow extends Component
 
     public function render(): View
     {
-        return view('livewire.contact-row');
+        return view('livewire.contacts.edit')
+            ->title($this->contact->name);
     }
 }
