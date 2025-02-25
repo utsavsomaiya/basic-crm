@@ -1,8 +1,8 @@
 <?php
 
-use App\Livewire\Contact\ListPage as ContactListPage;
+use App\Livewire\Contacts;
 use Illuminate\Support\Facades\Route;
 
 Route::permanentRedirect('/', 'contacts')->name('home');
 
-Route::get('contacts', ContactListPage::class)->name('contacts.index');
+Route::get('contacts', Contacts::class)->name('contacts.index');

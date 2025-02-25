@@ -22,7 +22,7 @@ class ContactFactory extends Factory
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'phone' => fake()->phoneNumber(),
-            'gender' => fake()->randomElement(array_map(fn (Gender $gender): int => $gender->value, Gender::cases())),
+            'gender' => fake()->randomElement(Gender::values()),
         ];
     }
 }

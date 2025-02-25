@@ -34,6 +34,7 @@
             <nav class="flex space-x-4">
                 <a
                     wire:navigate
+                    wire:current="font-bold underline"
                     href="{{ route('contacts.index') }}"
                     class="hover:underline"
                 >
