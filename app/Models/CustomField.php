@@ -24,6 +24,7 @@ class CustomField extends Model
         return [
             'type' => CustomFieldType::class,
             'options' => 'array',
+            'is_system' => 'boolean',
         ];
     }
 }

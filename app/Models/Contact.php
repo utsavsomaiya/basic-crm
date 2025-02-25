@@ -23,6 +23,7 @@ class Contact extends Model
     {
         return [
             'gender' => Gender::class,
+            'is_merged' => 'boolean',
         ];
     }
 }

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedTinyInteger('type');
             $table->string('name');
+            $table->boolean('is_system')->default(false);
             $table->json('options')->nullable();
             $table->timestamps();
             $table->softDeletes();
@@ -27,7 +28,6 @@ return new class extends Migration
             $table->string('value');
             $table->timestamps();
 
-            $table->unique(['custom_field_id', 'model_id'], 'field_model_index');
             $table->index(['custom_field_id', 'model_id', 'value'], 'field_value_index');
         });
     }
