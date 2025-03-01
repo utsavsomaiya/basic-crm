@@ -22,6 +22,7 @@ return new class extends Migration
             $table->boolean('is_merged')->default(false);
             $table->unsignedBigInteger('merged_into_id')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

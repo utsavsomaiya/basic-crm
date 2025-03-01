@@ -2,8 +2,8 @@
 
 namespace App\Enums;
 
-use Illuminate\Support\Str;
 use App\Enums\Traits\Values;
+use Illuminate\Support\Str;
 use Stringable;
 
 enum CustomFieldType: int

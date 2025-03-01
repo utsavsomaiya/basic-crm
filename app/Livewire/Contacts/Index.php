@@ -24,6 +24,8 @@ class Index extends Component
     public function contacts(): LengthAwarePaginator
     {
         return Contact::query()
+            ->where('is_merged', false)
+            ->whereNull('merged_into_id')
             ->when($this->search, function (Builder $query): void {
                 $query->where(function (Builder $query): void {
                     $query->where('name', 'like', "%{$this->search}%")

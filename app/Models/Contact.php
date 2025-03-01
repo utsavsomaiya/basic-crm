@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Contact extends Model
 {
@@ -15,6 +16,8 @@ class Contact extends Model
      * @use HasFactory<ContactFactory>
      */
     use HasFactory;
+
+    use SoftDeletes;
 
     /**
      * Get the attributes that should be cast.
@@ -36,6 +39,7 @@ class Contact extends Model
 
     public function customFields(): BelongsToMany
     {
-        return $this->belongsToMany(CustomField::class, 'custom_field_model', 'model_id');
+        return $this->belongsToMany(CustomField::class, 'custom_field_model', 'model_id')
+            ->using(CustomFieldModel::class);
     }
 }

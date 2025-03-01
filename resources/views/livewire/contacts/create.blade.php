@@ -1,3 +1,4 @@
+@use('App\Enums\CustomFieldType')
 @use('App\Enums\Gender')
 
 <div class="w-full max-w-5xl mx-auto p-8 bg-white shadow-xl rounded-2xl">
@@ -79,20 +80,42 @@
                     <label class="block text-gray-700 font-medium mb-1">Profile Photo</label>
                     <input
                         type="file"
-                        wire:model="profilePhoto"
+                        wire:model="profile_image"
                         class="w-full p-2 border rounded-xl bg-gray-100 cursor-pointer"
                     >
                 </div>
 
                 <div>
                     <label class="block text-gray-700 font-medium mb-1">Additional File</label>
-                    <input type="file" wire:model="additionalFile" class="w-full p-2 border rounded-xl bg-gray-100 cursor-pointer">
+                    <input
+                        type="file"
+                        wire:model="additional_file"
+                        class="w-full p-2 border rounded-xl bg-gray-100 cursor-pointer"
+                    >
                 </div>
             </div>
 
             <div class="space-y-6">
                 @foreach ($customFields as $customField)
-                    {{-- Render custom field --}}
+                    <div>
+                        <label class="block text-gray-700 font-medium mb-1">{{ $customField->name }}</label>
+                        @if ($customField->type === CustomFieldType::TEXT)
+                            <input
+                                wire:model="form.custom_fields.{{ $customField->id }}"
+                                type="text"
+                                class="w-full p-3 border rounded-xl focus:outline-none focus:ring-3 focus:ring-slate-300"
+                                placeholder="{{ 'Enter ' . str($customField->name)->lower() }}"
+                            >
+                        @elseif ($customField->type === CustomFieldType::OPTIONS)
+                            <select>
+                                <option value="">{{ 'Enter ' . str($customField->name)->lower() }}</option>
+                            </select>
+                        @elseif ($customField->type === CustomFieldType::DATE)
+                        @elseif ($customField->type === CustomFieldType::TEXTAREA)
+                        @else
+                            Sorry other types we cannot support for now!
+                        @endif
+                    </div>
                 @endforeach
             </div>
         </div>

@@ -5,7 +5,9 @@ namespace App\Livewire\Contacts;
 use App\Livewire\Forms\ContactForm;
 use App\Models\Contact;
 use App\Models\CustomField;
+use App\Models\CustomFieldModel;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Arr;
 use Livewire\Component;
 
 class Create extends Component
@@ -17,9 +19,10 @@ class Create extends Component
         $valiDatedData = $this->form->validate();
 
         $this->storeFiles($valiDatedData);
-        $this->storeCustomFields($valiDatedData);
 
-        Contact::query()->create($valiDatedData);
+        $contact = Contact::query()->create(Arr::except($valiDatedData, ['custom_fields']));
+
+        $this->storeCustomFields($valiDatedData['custom_fields'], $contact);
 
         $this->redirectRoute('contacts.index', navigate: true);
     }
@@ -35,11 +38,21 @@ class Create extends Component
         }
     }
 
-    private function storeCustomFields(array &$valiDatedData): void
+    private function storeCustomFields(array $customFields, Contact $contact): void
     {
-        foreach ($this->form->customFields as $customField) {
-            // Store into database!
+        $customFieldModels = [];
+
+        foreach ($customFields as $id => $value) {
+            $customFieldModels[] = [
+                'model_id' => $contact->id,
+                'custom_field_id' => $id,
+                'value' => $value,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ];
         }
+
+        CustomFieldModel::query()->insert($customFieldModels);
     }
 
     public function render(): View
