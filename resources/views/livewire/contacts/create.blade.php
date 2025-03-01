@@ -127,7 +127,14 @@
             </div>
         </div>
 
-        <div class="mt-8">
+        <div class="flex items-center gap-x-3 mt-8">
+            <a
+                wire:navigate
+                href="{{ route('contacts.index') }}"
+                class="w-full p-3 bg-slate-200 text-center text-black font-semibold rounded-xl hover:bg-slate-400 transition-all"
+            >
+                Cancel
+            </a>
             <button
                 type="submit"
                 class="w-full p-3 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition-all"
