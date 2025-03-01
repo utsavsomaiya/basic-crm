@@ -106,12 +106,19 @@
                                 class="w-full p-3 border rounded-xl focus:outline-none focus:ring-3 focus:ring-slate-300"
                                 placeholder="{{ 'Enter ' . str($customField->name)->lower() }}"
                             >
-                        @elseif ($customField->type === CustomFieldType::OPTIONS)
-                            <select>
-                                <option value="">{{ 'Enter ' . str($customField->name)->lower() }}</option>
-                            </select>
                         @elseif ($customField->type === CustomFieldType::DATE)
+                            <input
+                                wire:model="form.custom_fields.{{ $customField->id }}"
+                                type="date"
+                                class="w-full p-3 border rounded-xl focus:outline-none focus:ring-3 focus:ring-slate-300"
+                            >
                         @elseif ($customField->type === CustomFieldType::TEXTAREA)
+                            <textarea
+                                wire:model="form.custom_fields.{{ $customField->id }}"
+                                class="w-full p-3 border rounded-xl focus:outline-none focus:ring-3 focus:ring-slate-300"
+                                placeholder="{{ 'Enter ' . str($customField->name)->lower() }}"
+                                rows="4"
+                            ></textarea>
                         @else
                             Sorry other types we cannot support for now!
                         @endif

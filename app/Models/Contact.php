@@ -40,6 +40,7 @@ class Contact extends Model
     public function customFields(): BelongsToMany
     {
         return $this->belongsToMany(CustomField::class, 'custom_field_model', 'model_id')
-            ->using(CustomFieldModel::class);
+            ->using(CustomFieldModel::class)
+            ->withTimestamps();
     }
 }

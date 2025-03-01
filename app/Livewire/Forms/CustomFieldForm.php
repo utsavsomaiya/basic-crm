@@ -3,6 +3,7 @@
 namespace App\Livewire\Forms;
 
 use App\Enums\CustomFieldType;
+use App\Models\CustomField;
 use Illuminate\Validation\Rule;
 use Livewire\Form;
 
@@ -13,6 +14,15 @@ class CustomFieldForm extends Form
     public ?int $type = null;
 
     public array $options = [];
+
+    public function init(CustomField $customField): void
+    {
+        $this->fill([
+            'name' => $customField->name,
+            'type' => $customField->type->value,
+            'options' => $customField->options ?? [],
+        ]);
+    }
 
     public function rules(): array
     {
