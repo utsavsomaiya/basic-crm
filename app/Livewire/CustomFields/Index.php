@@ -8,6 +8,13 @@ use Livewire\Component;
 
 class Index extends Component
 {
+    public function delete(CustomField $customField): void
+    {
+        $customField->delete();
+
+        $this->dispatch('deleted');
+    }
+
     public function render(): View
     {
         return view('livewire.custom-fields.index')

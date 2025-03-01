@@ -22,6 +22,10 @@ class DatabaseSeeder extends Seeder
             )
             ->create();
 
-        Contact::factory(100)->create();
+        Contact::factory(100)
+            ->hasAttached($customFields[0], ['value' => today()->toDateString()])
+            ->hasAttached($customFields[1], ['value' => fake()->company()])
+            ->hasAttached($customFields[2], ['value' => fake()->address()])
+            ->create();
     }
 }

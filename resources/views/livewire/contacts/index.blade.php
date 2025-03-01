@@ -38,7 +38,7 @@
                     <th class="p-4 text-left">#</th>
                     <th class="p-4 text-left">Name</th>
                     <th class="p-4 text-left">Email</th>
-                    <th class="p-4 text-center">Actions</th>
+                    <th class="p-4 text-left">Actions</th>
                 </tr>
             </thead>
             <tbody wire:loading.class="opacity-50">

@@ -7,6 +7,7 @@ use Database\Factories\ContactFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Contact extends Model
 {
@@ -31,5 +32,10 @@ class Contact extends Model
     public function mergedInto(): BelongsTo
     {
         return $this->belongsTo(self::class)->with(__FUNCTION__);
+    }
+
+    public function customFields(): BelongsToMany
+    {
+        return $this->belongsToMany(CustomField::class, 'custom_field_model', 'model_id');
     }
 }
