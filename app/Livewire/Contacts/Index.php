@@ -20,6 +20,8 @@ class Index extends Component
 
     public $gender = '';
 
+    public $secondaryContact = '';
+
     public function updatedSearch(): void
     {
         $this->resetPage();
@@ -51,8 +53,25 @@ class Index extends Component
         $this->dispatch('deleted');
     }
 
+    public function merge(Contact $masterContact): void
+    {
+        $this->validate(['secondaryContact' => ['required', 'integer']]);
+
+        $masterContact->loadMissing('customFields');
+
+        $masterContact->merged_into_id = $this->secondaryContact;
+        $masterContact->is_merged = true;
+        $masterContact->save();
+
+        $this->reset('secondaryContact');
+        $this->dispatch('merged');
+    }
+
     public function render(): View
     {
-        return view('livewire.contacts.index')->title('Contacts');
+        return view('livewire.contacts.index')
+            // TODO: performance Need fetch via search!
+            ->with('masterContacts', Contact::query()->select('id', 'name')->orderBy('name')->get())
+            ->title('Contacts');
     }
 }

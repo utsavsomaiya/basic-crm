@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Contact extends Model
@@ -32,6 +33,11 @@ class Contact extends Model
         ];
     }
 
+    public function mergedContacts(): HasMany
+    {
+        return $this->hasMany(self::class, 'merged_into_id')->with(__FUNCTION__);
+    }
+
     public function mergedInto(): BelongsTo
     {
         return $this->belongsTo(self::class)->with(__FUNCTION__);
@@ -41,6 +47,7 @@ class Contact extends Model
     {
         return $this->belongsToMany(CustomField::class, 'custom_field_model', 'model_id')
             ->using(CustomFieldModel::class)
+            ->withPivot(['value'])
             ->withTimestamps();
     }
 }

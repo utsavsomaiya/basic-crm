@@ -67,7 +67,7 @@
                                             href="{{ route('contacts.edit', $contact) }}"
                                         >
                                             <x-menu.item>
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-4">
                                                     <path d="M5.433 13.917l1.262-3.155A4 4 0 017.58 9.42l6.92-6.918a2.121 2.121 0 013 3l-6.92 6.918c-.383.383-.84.685-1.343.886l-3.154 1.262a.5.5 0 01-.65-.65z" />
                                                     <path d="M3.5 5.75c0-.69.56-1.25 1.25-1.25H10A.75.75 0 0010 3H4.75A2.75 2.75 0 002 5.75v9.5A2.75 2.75 0 004.75 18h9.5A2.75 2.75 0 0017 15.25V10a.75.75 0 00-1.5 0v5.25c0 .69-.56 1.25-1.25 1.25h-9.5c-.69 0-1.25-.56-1.25-1.25v-9.5z" />
                                                 </svg>
@@ -77,15 +77,68 @@
                                     </x-menu.close>
 
                                     <x-dialog>
-                                        <x-dialog.open>
-                                            <x-menu.item>
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4">
-                                                    <path fill-rule="evenodd" d="M8.75 1A2.75 2.75 0 006 3.75v.443c-.795.077-1.584.176-2.365.298a.75.75 0 10.23 1.482l.149-.022.841 10.518A2.75 2.75 0 007.596 19h4.807a2.75 2.75 0 002.742-2.53l.841-10.52.149.023a.75.75 0 00.23-1.482A41.03 41.03 0 0014 4.193V3.75A2.75 2.75 0 0011.25 1h-2.5zM10 4c.84 0 1.673.025 2.5.075V3.75c0-.69-.56-1.25-1.25-1.25h-2.5c-.69 0-1.25.56-1.25 1.25v.325C8.327 4.025 9.16 4 10 4zM8.58 7.72a.75.75 0 00-1.5.06l.3 7.5a.75.75 0 101.5-.06l-.3-7.5zm4.34.06a.75.75 0 10-1.5-.06l-.3 7.5a.75.75 0 101.5.06l.3-7.5z" clip-rule="evenodd" />
-                                                </svg>
+                                        <x-menu.close>
+                                            <x-dialog.open>
+                                                <x-menu.item>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4 text-black">
+                                                        <path fill-rule="evenodd" d="M12 5.25c1.213 0 2.415.046 3.605.135a3.256 3.256 0 0 1 3.01 3.01c.044.583.077 1.17.1 1.759L17.03 8.47a.75.75 0 1 0-1.06 1.06l3 3a.75.75 0 0 0 1.06 0l3-3a.75.75 0 0 0-1.06-1.06l-1.752 1.751c-.023-.65-.06-1.296-.108-1.939a4.756 4.756 0 0 0-4.392-4.392 49.422 49.422 0 0 0-7.436 0A4.756 4.756 0 0 0 3.89 8.282c-.017.224-.033.447-.046.672a.75.75 0 1 0 1.497.092c.013-.217.028-.434.044-.651a3.256 3.256 0 0 1 3.01-3.01c1.19-.09 2.392-.135 3.605-.135Zm-6.97 6.22a.75.75 0 0 0-1.06 0l-3 3a.75.75 0 1 0 1.06 1.06l1.752-1.751c.023.65.06 1.296.108 1.939a4.756 4.756 0 0 0 4.392 4.392 49.413 49.413 0 0 0 7.436 0 4.756 4.756 0 0 0 4.392-4.392c.017-.223.032-.447.046-.672a.75.75 0 0 0-1.497-.092c-.013.217-.028.434-.044.651a3.256 3.256 0 0 1-3.01 3.01 47.953 47.953 0 0 1-7.21 0 3.256 3.256 0 0 1-3.01-3.01 47.759 47.759 0 0 1-.1-1.759L6.97 15.53a.75.75 0 0 0 1.06-1.06l-3-3Z" clip-rule="evenodd" />
+                                                    </svg>
+                                                    Merge
+                                                </x-menu.item>
+                                            </x-dialog.open>
+                                        </x-menu.close>
+                                        <x-dialog.panel>
+                                            <div
+                                                x-on:merged.window="$dialog.close()"
+                                                class="flex flex-col gap-6"
+                                            >
+                                                <h2 class="font-semibold text-3xl">Merge contact</h2>
+                                                <label class="flex flex-col gap-2">
+                                                    Master contact!
+                                                    <select
+                                                        wire:model="secondaryContact"
+                                                        class="w-full p-3 border rounded-xl appearance-none focus:outline-none focus:ring-3 focus:ring-slate-300"
+                                                    >
+                                                        <option value="">Select master contact</option>
+                                                        @foreach ($masterContacts->reject(fn ($c) => $c->id === $contact->id) as $masterContact)
+                                                            <option value="{{ $masterContact->id }}">{{ $masterContact->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </label>
 
-                                                Delete
-                                            </x-menu.item>
-                                        </x-dialog.open>
+                                                <x-dialog.footer>
+                                                    <x-dialog.close>
+                                                        <button
+                                                            type="button"
+                                                            class="text-center rounded-xl bg-slate-300 text-slate-800 px-6 py-2 font-semibold"
+                                                        >
+                                                            Cancel
+                                                        </button>
+                                                    </x-dialog.close>
+
+                                                    <button
+                                                        type="button"
+                                                        wire:click="merge({{ $contact->id }})"
+                                                        class="text-center rounded-xl bg-slate-500 text-white px-6 py-2 font-semibold disabled:cursor-not-allowed disabled:opacity-50"
+                                                    >
+                                                        Merge
+                                                    </button>
+                                                </x-dialog.footer>
+                                            </div>
+                                        </x-dialog.panel>
+                                    </x-dialog>
+
+                                    <x-dialog>
+                                        <x-menu.close>
+                                            <x-dialog.open>
+                                                <x-menu.item>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-4">
+                                                        <path fill-rule="evenodd" d="M8.75 1A2.75 2.75 0 006 3.75v.443c-.795.077-1.584.176-2.365.298a.75.75 0 10.23 1.482l.149-.022.841 10.518A2.75 2.75 0 007.596 19h4.807a2.75 2.75 0 002.742-2.53l.841-10.52.149.023a.75.75 0 00.23-1.482A41.03 41.03 0 0014 4.193V3.75A2.75 2.75 0 0011.25 1h-2.5zM10 4c.84 0 1.673.025 2.5.075V3.75c0-.69-.56-1.25-1.25-1.25h-2.5c-.69 0-1.25.56-1.25 1.25v.325C8.327 4.025 9.16 4 10 4zM8.58 7.72a.75.75 0 00-1.5.06l.3 7.5a.75.75 0 101.5-.06l-.3-7.5zm4.34.06a.75.75 0 10-1.5-.06l-.3 7.5a.75.75 0 101.5.06l.3-7.5z" clip-rule="evenodd" />
+                                                    </svg>
+                                                    Delete
+                                                </x-menu.item>
+                                            </x-dialog.open>
+                                        </x-menu.close>
 
                                         <x-dialog.panel>
                                             <div
@@ -94,7 +147,7 @@
                                                 class="flex flex-col gap-6"
                                             >
                                                 <h2 class="font-semibold text-3xl">Are you sure you?</h2>
-                                                <h2 class="text-lg text-slate-700">This operation is permanant and cannot be reversed. This contact will be deleted forever.</h2>
+                                                <h2 class="text-lg text-slate-700">This operation is permanent and cannot be reversed. This contact will be deleted forever.</h2>
 
                                                 <label class="flex flex-col gap-2">
                                                     Type "CONFIRM"
