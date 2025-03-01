@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Enums\Enums\CustomFieldType;
+use App\Enums\CustomFieldType;
 use Database\Factories\CustomFieldFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -24,7 +24,6 @@ class CustomField extends Model
         return [
             'type' => CustomFieldType::class,
             'options' => 'array',
-            'is_system' => 'boolean',
         ];
     }
 }

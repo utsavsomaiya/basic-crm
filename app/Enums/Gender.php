@@ -2,21 +2,16 @@
 
 namespace App\Enums;
 
+use App\Enums\Traits\Values;
 use Illuminate\Support\Str;
 
 enum Gender: int
 {
+    use Values;
+
     case MALE = 1;
     case FEMALE = 2;
     case OTHER = 3;
-
-    /**
-     * @return int[]
-     */
-    public static function values(): array
-    {
-        return array_column(self::cases(), 'value');
-    }
 
     /**
      * @return array<int, string>

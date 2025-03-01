@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->unsignedTinyInteger('type');
             $table->string('name');
-            $table->boolean('is_system')->default(false);
             $table->json('options')->nullable();
             $table->timestamps();
             $table->softDeletes();

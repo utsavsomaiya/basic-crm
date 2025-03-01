@@ -6,6 +6,7 @@ use App\Enums\Gender;
 use Database\Factories\ContactFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Contact extends Model
 {
@@ -25,5 +26,10 @@ class Contact extends Model
             'gender' => Gender::class,
             'is_merged' => 'boolean',
         ];
+    }
+
+    public function mergedInto(): BelongsTo
+    {
+        return $this->belongsTo(self::class)->with(__FUNCTION__);
     }
 }

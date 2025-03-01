@@ -1,9 +1,13 @@
 <?php
 
-namespace App\Enums\Enums;
+namespace App\Enums;
+
+use App\Enums\Traits\Values;
 
 enum CustomFieldType: int
 {
+    use Values;
+
     case TEXT = 1;
     case DATE = 2;
     case NUMBER = 3;

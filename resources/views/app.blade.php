@@ -35,6 +35,14 @@
                 <a
                     wire:navigate
                     wire:current="font-bold underline"
+                    href="{{ route('custom_fields.index') }}"
+                    class="hover:underline"
+                >
+                    Custom fields
+                </a>
+                <a
+                    wire:navigate
+                    wire:current="font-bold underline"
                     href="{{ route('contacts.index') }}"
                     class="hover:underline"
                 >
