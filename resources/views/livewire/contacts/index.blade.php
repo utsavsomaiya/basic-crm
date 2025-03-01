@@ -38,6 +38,7 @@
                     <th class="p-4 text-left">#</th>
                     <th class="p-4 text-left">Name</th>
                     <th class="p-4 text-left">Email</th>
+                    <th class="p-4 text-left">Gender</th>
                     <th class="p-4 text-left">Actions</th>
                 </tr>
             </thead>
@@ -50,6 +51,7 @@
                         <td class="p-4">{{ $loop->iteration }}</td>
                         <td class="p-4">{{ $contact->name }}</td>
                         <td class="p-4">{{ $contact->email }}</td>
+                        <td class="p-4">{{ str($contact->gender->name)->lower()->ucFirst() }}</td>
                         <td class="p-4 text-center">
                             <x-menu>
                                 <x-menu.button>
@@ -134,12 +136,16 @@
                     </tr>
                 @empty
                     <tr>
-                        <td class="p-4 text-center" colspan="4">
+                        <td class="p-4 text-center" colspan="5">
                             No contacts found.
                         </td>
                     </tr>
                 @endforelse
             </tbody>
         </table>
+
+        <div @class(['p-6' => $this->contacts->isNotEmpty()])>
+            {{ $this->contacts->links() }}
+        </div>
     </div>
 </div>

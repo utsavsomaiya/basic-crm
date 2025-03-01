@@ -20,6 +20,11 @@ class Index extends Component
 
     public $gender = '';
 
+    public function updatedSearch(): void
+    {
+        $this->resetPage();
+    }
+
     #[Computed]
     public function contacts(): LengthAwarePaginator
     {
